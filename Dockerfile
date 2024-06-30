@@ -12,7 +12,7 @@ RUN apk add --no-cache \
     python3 \
     py3-pip
 
-
+RUN python3 -m ensurepip --upgrade
 COPY requirements.txt /requirements.txt
 RUN pip3 install --no-cache-dir -r requirements.txt
 
