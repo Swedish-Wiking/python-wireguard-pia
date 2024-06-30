@@ -10,6 +10,15 @@ RUN apk add --no-cache \
     openssl \
     wireguard-tools
 
+# Install python/pip
+ENV PYTHONUNBUFFERED=1
+RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
+RUN python3 -m ensurepip
+RUN pip3 install --no-cache --upgrade pip setuptools
+
+COPY requirements.txt ./
+RUN pip3 install --no-cache-dir -r requirements.txt
+
 # Modify wg-quick so it doesn't die without --privileged
 # Set net.ipv4.conf.all.src_valid_mark=1 on container creation using --sysctl if required instead
 # To avoid confusion, also suppress the error message that displays even when pre-set to 1 on container creation
