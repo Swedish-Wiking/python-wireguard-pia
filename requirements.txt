@@ -1,0 +1,2 @@
+nodriver==0.29rc2
+pyotp==2.9.0
