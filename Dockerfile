@@ -8,15 +8,13 @@ RUN apk add --no-cache \
     iptables-legacy \
     jq \
     openssl \
-    wireguard-tools
+    wireguard-tools \
+    python3 \
+    py3-pip
 
-# Install python/pip
-ENV PYTHONUNBUFFERED=1
-RUN apk add --update --no-cache python3 py3-pip
 
 COPY requirements.txt /requirements.txt
-WORKDIR /
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Modify wg-quick so it doesn't die without --privileged
 # Set net.ipv4.conf.all.src_valid_mark=1 on container creation using --sysctl if required instead
