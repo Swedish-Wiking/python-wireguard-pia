@@ -12,7 +12,7 @@ RUN apk add --no-cache \
     python3 \
     py3-pip
 
-RUN pip3 install --no-cache-dir nodriver pyotp
+RUN pip3 install --break-system-packages --no-cache-dir nodriver pyotp
 
 # Modify wg-quick so it doesn't die without --privileged
 # Set net.ipv4.conf.all.src_valid_mark=1 on container creation using --sysctl if required instead
