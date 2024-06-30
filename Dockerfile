@@ -13,7 +13,7 @@ RUN apk add --no-cache \
 # Install python/pip
 ENV PYTHONUNBUFFERED=1
 RUN apk add --update --no-cache python3 py3-pip
-COPY requirements.txt ./
+COPY ./requirements.txt /requirements.txt
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Modify wg-quick so it doesn't die without --privileged
