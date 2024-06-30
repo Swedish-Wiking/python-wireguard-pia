@@ -10,7 +10,9 @@ RUN apk add --no-cache \
     openssl \
     wireguard-tools \
     python3 \
-    py3-pip
+    py3-pip \
+    chromium \
+    chromium-chromedriver
 
 RUN pip3 install --break-system-packages --no-cache-dir nodriver pyotp
 
