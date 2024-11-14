@@ -67,18 +67,18 @@ get_auth_token () {
     # https://github.com/pia-foss/desktop/blob/master/daemon/src/metaserviceapibase.h
     token_response=$(curl --silent --location --show-error --request POST --max-time "$curl_max_time" \
         --resolve "$meta_cn:$meta_port:$meta_ip" \
-        --form "username=$user" \
-        --form "password=$pass" \
+        --data-urlencode "username=$user" \
+        --data-urlencode "password=$pass" \
         --cacert "$cacert" \
         "https://$meta_cn:$meta_port/api/client/v2/token")
   else
     token_response=$(curl --silent --location --show-error --request POST --max-time "$curl_max_time" \
         'https://www.privateinternetaccess.com/api/client/v2/token' \
-        --form "username=$user" \
-        --form "password=$pass")
+        --data-urlencode "username=$user" \
+        --data-urlencode "password=$pass")
   fi
   TOK=$(jq -r .'token' <<< "$token_response")
-  if [ -z "$TOK" ]; then
+  if [ -z "$TOK" ] || [ "$TOK" == "null" ]; then
     echo "Failed to acquire new auth token. Response:" >&2
     echo "$token_response" >&2
     exit 1
